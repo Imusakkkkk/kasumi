@@ -1,8 +1,8 @@
-updated : 08/08/2026
+updated : 13/11/2026
 
-# contributing to oboromi
+# contributing to kasumi
 
-Thanks for the interest! oboromi is an (not yet what you probably think) emulator written in Rust
+Thanks for the interest! kasumi is a very experimental Nintendo Switch 2 emulator written primarily in Rust, based on [oboromi](https://github.com/0xNikilite/oboromi).
 
 ## before you start
 
@@ -16,15 +16,19 @@ You'll need:
 ### installing Qt
 
 **Windows:**
-Download Qt from [qt.io](https://www.qt.io/development/download-qt-installer-oss) and install it. The default installation path is usually `C:\Qt`. During installation, make sure to select the MSVC 64-bit component (e.g., `msvc2022_64`).
+
+Download Qt from [qt.io](https://www.qt.io/development/download-qt-installer-oss) and install it. The default installation path is usually `C:\Qt\`. During installation, make sure to select the MSVC 64-bit component (e.g., `msvc2022_64`).
 
 **Linux (Debian/Ubuntu):**
+
 ```bash
 sudo apt install qt6-base-dev qt6-declarative-dev
 ```
+
 For other distros, use your package manager.
 
 **macOS:**
+
 ```bash
 brew install qt@6
 ```
@@ -38,16 +42,19 @@ brew install qt@6
 Tell CMake where Qt is installed via `CMAKE_PREFIX_PATH`:
 
 **Windows (adjust the path to your Qt install):**
+
 ```bash
 cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="C:/Qt/6.12.0/msvc2022_64"
 ```
 
 **Linux:**
+
 ```bash
 cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 ```
 
 **macOS:**
+
 ```bash
 cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(brew --prefix qt@6)"
 ```
@@ -67,11 +74,13 @@ cmake --build build
 The executable is placed directly in `build/`:
 
 **Windows:**
+
 ```bash
 .\build\oboromi.exe
 ```
 
 **Linux/macOS:**
+
 ```bash
 ./build/oboromi
 ```
@@ -103,4 +112,4 @@ open an issue with:
 
 ## license
 
-By contributing, you agree your code gets released under GNU GPLv3, same as the rest of the project.
+By contributing, you agree your code gets released under GNU GPLv3, same as the rest of the project. 

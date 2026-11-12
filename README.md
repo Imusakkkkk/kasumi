@@ -1,47 +1,62 @@
-<p align="center">
-  <img width="32%" src="https://github.com/user-attachments/assets/2cf6431e-e9a5-4f03-98ce-d8c975ddde77" alt="oboromi logo"/>
+ <p align="center">
+  <img width="32%" src="PATH_TO_KASUMI_LOGO" alt="kasumi logo"/>
 </p>
 
 <p align="center">
-  <a href="https://github.com/0xNikilite/oboromi/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat"></a>
-  <a href="https://discord.gg/g9sehj8bPz"><img alt="Discord" src="https://img.shields.io/discord/1387476383663390732?style=flat&label=Discord&color=5865F2&logo=discord&logoColor=white"></a>
+  <a href="https://github.com/Imusakkkkk/Kasumi/blob/main/license.txt">
+    <img alt="License" src="https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat">
+  </a>
+  <a href="https://github.com/Imusakkkkk/Kasumi">
+    <img alt="GitHub" src="https://img.shields.io/badge/project-kasumi-8A8A8A?style=flat&logo=github">
+  </a>
 </p>
 
-<h4 align="center">(◕‿◕)&nbsp;&nbsp;join our discord ↑</h4>
-
-<h1 align="center">oboromi</h1>
-<h4 align="center">a work-in-progress nintendo switch 2 emulator foundation</h4>
+<h1 align="center">kasumi</h1>
+<h4 align="center">a very experimental nintendo switch 2 emulator project</h4>
 <h5 align="center">written lowercase.</h5>
 
-oboromi is an experimental emulator written primarily in Rust, with a Qt 6 debugging frontend.
+kasumi is an extremely experimental nintendo switch 2 emulator written primarily in rust, with a Qt 6 debugging frontend.
+
+based on the original [oboromi](https://github.com/0xNikilite/oboromi) project, kasumi aims to independently continue exploring and developing the foundations of nintendo switch 2 emulation.
 
 ## current focus
 
-we are developing a new [ARMv9 CPU emulator](https://github.com/vrtgs/rapid-arm-emu) (credit: vrtgs), targeting the ARM extensions required by the ns2's T239.
+we are developing a new [ARMv9 CPU emulator](https://github.com/vrtgs/rapid-arm-emu) (original work by vrtgs), targeting the ARM extensions required by the nintendo switch 2's T239.
 
 the GPU implementation targets NVIDIA SM86.
 
-oboromi cannot currently run commercial games or firmware.
+kasumi is still in a very early experimental stage. it cannot currently run commercial games or firmware.
 
 ## repository
 
-- `core/` Rust emulator core
-- `gui-qt/` cpp Qt 6 frontend
-- `scripts/` code-generation and helper scripts
-- `docs/` documentation
+- `core/` — rust emulator core
+- `gui-qt/` — c++ Qt 6 frontend
+- `scripts/` — code-generation and helper scripts
+- `docs/` — documentation
+- `benchmarks/` — performance benchmarks
+- `examples/` — examples and experiments
+- `assets/` — project assets
 
 ## building
 
-Requirements: stable Rust, CMake, Ninja, a C++ compiler, and Qt 6.
+requirements: stable rust, cmake, ninja, a c++ compiler, and Qt 6.
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup and build instructions.
+see [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup and build instructions.
+
+## project origins
+
+kasumi is an independent project based on the [oboromi](https://github.com/0xNikilite/oboromi) codebase.
+
+the original project and its contributors deserve credit for the work that made kasumi possible.
 
 ## license
 
-GPL-3.0. See [`license.txt`](license.txt).
+GPL-3.0. see [`license.txt`](license.txt).
 
 ## what does the name mean?
 
-**oboromi (朧実)** is a constructed japanese neologism combining **朧 (oboro**, "hazy/vague") + **実 (-mi**, "essence/fruit").
+**kasumi (霞)** is a japanese word meaning **"mist"** or **"haze."**
 
-it means **"the tangible essence of imperfection."** even if oboromi was ever finished, it could never be perfect, and that's not a failure, just what it means to be an emulator.
+the name represents something that is not yet fully clear: an experimental project exploring the unknown, gradually taking shape through research, development, and experimentation.
+
+like the mist, kasumi is still evolving. its final form is not yet defined.

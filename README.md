@@ -1,5 +1,5 @@
  <p align="center">
-  <img width="32%" src="PATH_TO_KASUMI_LOGO" alt="kasumi logo"/>
+  <img width="32%" src="./kasumi-logo.png" alt="kasumi logo"/>
 </p>
 
 <p align="center">
@@ -7,7 +7,7 @@
     <img alt="License" src="https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat">
   </a>
   <a href="https://github.com/Imusakkkkk/Kasumi">
-    <img alt="GitHub" src="https://img.shields.io/badge/project-kasumi-8A8A8A?style=flat&logo=github">
+    <img alt="GitHub" src="https://img.shields.io/badge/project-kasumi-ec4899?style=flat&logo=github">
   </a>
 </p>
 
@@ -33,9 +33,6 @@ kasumi is still in a very early experimental stage. it cannot currently run comm
 - `gui-qt/` — c++ Qt 6 frontend
 - `scripts/` — code-generation and helper scripts
 - `docs/` — documentation
-- `benchmarks/` — performance benchmarks
-- `examples/` — examples and experiments
-- `assets/` — project assets
 
 ## building
 
@@ -59,4 +56,4 @@ GPL-3.0. see [`license.txt`](license.txt).
 
 the name represents something that is not yet fully clear: an experimental project exploring the unknown, gradually taking shape through research, development, and experimentation.
 
-like the mist, kasumi is still evolving. its final form is not yet defined.
+like the mist, kasumi is still evolving. its final fo rm is not yet defined.

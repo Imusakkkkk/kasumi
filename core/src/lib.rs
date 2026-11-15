@@ -1,4 +1,5 @@
 pub mod cpu;
+pub mod memory;
 pub mod ffi;
 pub mod fs;
 pub mod gpu;

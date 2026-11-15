@@ -5,6 +5,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Rust core via Corrosion
+# unicorn-engine-sys uses bindgen, which needs libclang.
+if(NOT DEFINED ENV{LIBCLANG_PATH})
+    if(EXISTS "C:/Program Files/LLVM/bin/libclang.dll")
+        set(ENV{LIBCLANG_PATH} "C:/Program Files/LLVM/bin")
+    endif()
+endif()
+
 include(FetchContent)
 FetchContent_Declare(
     Corrosion

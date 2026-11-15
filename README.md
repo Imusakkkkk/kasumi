@@ -39,6 +39,7 @@ kasumi is still in a very early experimental stage. it cannot currently run comm
 requirements: stable rust, cmake, ninja, a c++ compiler, and Qt 6.
 
 see [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup and build instructions.
+see [`docs/development/windows-build.md`](docs/development/windows-build.md) for the verified Windows build guide.
 
 ## project origins
 

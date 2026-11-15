@@ -16,7 +16,16 @@ libc = "0.2.177"
 memmap2 = "0.9.9"
 log = { workspace = true }
 ash = "0.38.0"
+sha2 = "0.10"
+zstd = "0.13"
+
+[dev-dependencies]
+criterion = "0.5"
 
 [features]
 default = []
 trace = []
+
+[[bench]]
+name = "cpu"
+harness = false

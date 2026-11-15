@@ -1,4 +1,5 @@
-use crate::cpu::UnicornCPU;
+use crate::cpu::backend::CpuBackend;
+use crate::cpu::unicorn_interface::UnicornCPU;
 use std::pin::Pin;
 
 pub const CORE_COUNT: usize = 8;
@@ -10,7 +11,7 @@ pub const MEMORY_SIZE: u64 = 12 * 1024 * 1024 * 1024;
 pub const MEMORY_BASE: u64 = 0x0;
 
 pub struct CpuManager {
-    pub cores: Vec<UnicornCPU>,
+    pub cores: Vec<Box<dyn CpuBackend>>,
     // Pin prevents reallocation from invalidating pointers
     #[allow(dead_code)]
     pub shared_memory: Pin<Box<[u8]>>,
@@ -37,7 +38,7 @@ impl CpuManager {
             let cpu = unsafe { UnicornCPU::new_with_shared_mem(i as u32, memory_ptr, size) };
 
             if let Some(cpu) = cpu {
-                cores.push(cpu);
+                cores.push(Box::new(cpu) as Box<dyn CpuBackend>);
             } else {
                 panic!("Failed to create Core {}", i);
             }
@@ -49,16 +50,20 @@ impl CpuManager {
         }
     }
 
-    pub fn run_all(&self) {
+    pub fn run_all(&mut self) {
         // for now, just step all cores sequentially (round-robin)
         // in the future, this would be threaded
-        for (_i, core) in self.cores.iter().enumerate() {
+        for (_i, core) in self.cores.iter_mut().enumerate() {
             // just run one step for testing
-            core.step();
+            let _ = core.step(1);
         }
     }
 
-    pub fn get_core(&self, id: usize) -> Option<&UnicornCPU> {
+    pub fn get_core(&self, id: usize) -> Option<&Box<dyn CpuBackend>> {
         self.cores.get(id)
+    }
+
+    pub fn get_core_mut(&mut self, id: usize) -> Option<&mut Box<dyn CpuBackend>> {
+        self.cores.get_mut(id)
     }
 }

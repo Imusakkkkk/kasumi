@@ -1,3 +1,7 @@
+pub mod nso;
+pub mod nup;
+pub mod nup_fs;
+
 use memmap2::Mmap;
 use std::fs;
 use std::path::Path;

@@ -1,6 +1,10 @@
 use std::sync::{Arc, Mutex};
 use unicorn_engine::{Arch, Mode, Prot, RegisterARM64, Unicorn};
 
+use super::backend::CpuBackend;
+use super::error::CpuError;
+use super::state::CpuStateSnapshot;
+
 /// Safe wrapper for Unicorn CPU emulator
 pub struct UnicornCPU {
     emu: Arc<Mutex<Unicorn<'static, ()>>>,
@@ -255,6 +259,69 @@ impl UnicornCPU {
         } else {
             0
         }
+    }
+}
+
+impl CpuBackend for UnicornCPU {
+    fn reset(&mut self) {
+        // no-op for now; preserve behavior
+    }
+    fn step(&mut self, _budget: u64) -> Result<u64, CpuError> {
+        Ok(UnicornCPU::step(self))
+    }
+    fn get_pc(&self) -> u64 {
+        UnicornCPU::get_pc(self)
+    }
+    fn set_pc(&mut self, val: u64) {
+        UnicornCPU::set_pc(self, val)
+    }
+    fn get_sp(&self) -> u64 {
+        UnicornCPU::get_sp(self)
+    }
+    fn set_sp(&mut self, val: u64) {
+        UnicornCPU::set_sp(self, val)
+    }
+    fn get_x(&self, reg: u32) -> Result<u64, CpuError> {
+        if reg > 30 {
+            return Err(CpuError::InvalidRegister(reg));
+        }
+        Ok(UnicornCPU::get_x(self, reg))
+    }
+    fn set_x(&mut self, reg: u32, val: u64) -> Result<(), CpuError> {
+        if reg > 30 {
+            return Err(CpuError::InvalidRegister(reg));
+        }
+        UnicornCPU::set_x(self, reg, val);
+        Ok(())
+    }
+    fn read_mem(&self, addr: u64, buf: &mut [u8]) -> Result<(), CpuError> {
+        let emu = self.emu.lock().unwrap();
+        if emu.mem_read(addr, buf).is_err() {
+            return Err(CpuError::MemoryFault { addr });
+        }
+        Ok(())
+    }
+    fn write_mem(&mut self, addr: u64, buf: &[u8]) -> Result<(), CpuError> {
+        let mut emu = self.emu.lock().unwrap();
+        if emu.mem_write(addr, buf).is_err() {
+            return Err(CpuError::MemoryFault { addr });
+        }
+        Ok(())
+    }
+    fn halt(&mut self) {
+        UnicornCPU::halt(self)
+    }
+    fn snapshot(&self) -> CpuStateSnapshot {
+        let mut snap = CpuStateSnapshot::default();
+        for i in 0..31u32 {
+            snap.x[i as usize] = UnicornCPU::get_x(self, i);
+        }
+        snap.sp = self.get_sp();
+        snap.pc = self.get_pc();
+        snap
+    }
+    fn backend_name(&self) -> &'static str {
+        "unicorn"
     }
 }
 

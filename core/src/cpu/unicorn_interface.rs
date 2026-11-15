@@ -328,5 +328,24 @@ impl CpuBackend for UnicornCPU {
 // remove Clone - sharing a CPU via clone is misleading
 // use Arc<UnicornCPU> directly if sharing is needed
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn exec_mov_add() {
+        let cpu = UnicornCPU::new().expect("unicorn");
+        cpu.write_u32(0, 0xd2800540); // MOVZ X0, #42
+        cpu.write_u32(4, 0xd2800c81); // MOVZ X1, #100
+        cpu.write_u32(8, 0x8b010002); // ADD X2, X0, X1
+        cpu.write_u32(12, 0xd4200000); // BRK #0
+        cpu.set_pc(0);
+        cpu.run();
+        assert_eq!(cpu.get_x(0), 42);
+        assert_eq!(cpu.get_x(1), 100);
+        assert_eq!(cpu.get_x(2), 142);
+    }
+}
+
 unsafe impl Send for UnicornCPU {}
 unsafe impl Sync for UnicornCPU {}
